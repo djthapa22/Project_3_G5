@@ -35,11 +35,12 @@ def welcome():
     return (
         f"Available Routes:<br/>"
         f"/api/v1.0/heat_map<br/>"
+        f"/api/v1.0/bar_graph"
     )
 
 
 @app.route("/api/v1.0/heat_map")
-def name_rating():
+def heat_maps():
     # Create our session (link) from Python to the DB
     session = Session(engine)
     lat= bnb_dset.latitude
@@ -60,7 +61,33 @@ def name_rating():
     return jsonify(heat_map_list)
    
 
-   
+@app.route("/api/v1.0/bar_graph")
+def bar_graph():
+    # Create our session (link) from Python to the DB
+    session=Session(engine)
+    listing= bnb_dset.host_total_listings_count
+    county= bnb_dset.county
+    price= bnb_dset.price
+    bedrooms= bnb_dset.bedrooms
+    rs= bnb_dset.review_scores_rating
+
+    sel= [listing,county,price,bedrooms,rs]
+    query_2= session.query(*sel).all()
+    session.close()
+    
+    bar_g= []
+    for l,c,p,b,r in query_2:
+        dict_2={}
+        dict_2["county"]=c
+        dict_2["listing"]= l
+        dict_2["price"]=p
+        dict_2["bedrooms"]=b
+        dict_2["review_score"]=r
+        bar_g.append(dict_2)
+        
+    
+    return jsonify(bar_g)
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
