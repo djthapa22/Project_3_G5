@@ -25,6 +25,7 @@ bnb_dset = Base.classes.bnb_dset
 # Flask Setup
 #################################################
 app = Flask(__name__)
+CORS(app, support_credentials=True)
 
 #################################################
 # Flask Routes
@@ -125,4 +126,3 @@ def cluster_m():
 
 if __name__ == '__main__':
     app.run(debug=True)
-CORS(app, support_credentials=True)
