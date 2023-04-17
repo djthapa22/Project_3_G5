@@ -66,13 +66,33 @@ d3.json(clusterUrl).then(function(response){
 });
 
 
-///// CREATING DROP DOWN MENU /////
+///// CREATING bar chart-- jc
 let graphUrl = "http://127.0.0.1:5000/api/v1.0/bar_graph"
 
-// d3.json(graphUrl).then(function(data){
-//     console.log(data)
-// });
+d3.json(graphUrl).then(function(data){
+    console.log(data)
 
+    const aggregateArray = arr => {
+      return arr.reduce((acc, val) => {
+         const index = acc.findIndex(obj => obj.county === val.county);
+         if(index !== -1){
+            acc[index].amount += val.amount;
+         }else{
+            acc.push({
+               county: val.county,
+               amount: val.amount
+            });
+         };
+         return acc;
+      }, []);
+   };
+   console.log(aggregateArray(transactions));
+});
+
+
+
+
+///// CREATING DROP DOWN MENU /////
 // function init(){
 //     // D3 to select dropdown menu
 //     let dropMenu = d3.select("#selDataset");

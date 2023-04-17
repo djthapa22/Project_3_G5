@@ -4,10 +4,7 @@ import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
 from sqlalchemy import create_engine, func
-<<<<<<< HEAD
-=======
 from flask_cors import CORS, cross_origin
->>>>>>> origin/caleb
 
 from flask import Flask, jsonify
 
@@ -28,10 +25,7 @@ bnb_dset = Base.classes.bnb_dset
 # Flask Setup
 #################################################
 app = Flask(__name__)
-<<<<<<< HEAD
-=======
 CORS(app, support_credentials=True)
->>>>>>> origin/caleb
 
 #################################################
 # Flask Routes
@@ -42,33 +36,6 @@ def welcome():
     """List all available api routes."""
     return (
         f"Available Routes:<br/>"
-<<<<<<< HEAD
-        f"/api/v1.0/name_rating<br/>"
-    )
-
-
-@app.route("/api/v1.0/name_rating")
-def name_rating():
-    # Create our session (link) from Python to the DB
-    session = Session(engine)
-
-    """Return a list of all passenger names"""
-    # Query all passengers
-    results = session.query(bnb_dset.name, bnb_dset.review_scores_value).all()
-
-    session.close()
-
-    # Convert list of tuples into normal list
-    all_info = []
-    for name, review_scores_value in results:
-        dict = {}
-        dict["name"] = name
-        dict["review_scores_value"] = review_scores_value
-        all_info.append(dict)
-   
-
-    return jsonify(all_info)
-=======
         f"/api/v1.0/heat_map<br/>"
         f"/api/v1.0/cluster_map<br/>"
         f"/api/v1.0/bar_graph"
@@ -101,24 +68,22 @@ def heat_maps():
 def bar_graph():
     # Create our session (link) from Python to the DB
     session=Session(engine)
-    listing= bnb_dset.host_total_listings_count
     county= bnb_dset.county
     price= bnb_dset.price
-    bedrooms= bnb_dset.bedrooms
     rs= bnb_dset.review_scores_rating
+    rc= bnb_dset.review_scores_cleanliness
 
-    sel= [listing,county,price,bedrooms,rs]
+    sel= [county,price,rs,rc]
     query_2= session.query(*sel).all()
     session.close()
     
     bar_g= []
-    for l,c,p,b,r in query_2:
+    for c,p,r,cl in query_2:
         dict_2={}
         dict_2["county"]=c
-        dict_2["listing"]= l
         dict_2["price"]=p
-        dict_2["bedrooms"]=b
         dict_2["review_score"]=r
+        dict_2["cleanliness_score"]=cl
         bar_g.append(dict_2)
         
     return jsonify(bar_g)
@@ -156,7 +121,6 @@ def cluster_m():
         cluster_g.append(dict_3)
         
     return jsonify(cluster_g)
->>>>>>> origin/caleb
 
 if __name__ == '__main__':
     app.run(debug=True)
