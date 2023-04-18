@@ -1,7 +1,7 @@
 # Traveling to Minneapolis? We'll find your perfect AirBnB!
 
-## Overview
-For this project, our group decided to analyze the AirBnB data within the greater Twin Cities area.
+## Overview of ETL:
+For this project, our group decided to analyze the AirBnB listings data within the greater Twin Cities area.
 We wanted to understand how we could use an online datasource (API) to extract data and complete the following steps of ETL steps in driving our visualizations. 
 
 * ***<ins>Extraction:*** </ins>  <br> We utilized the AirBnB data found in below resource for Twin Cities area.
@@ -15,24 +15,28 @@ We wanted to understand how we could use an online datasource (API) to extract d
   * Javascript: Using HTML, CSS,and other configurations used Javascript to create our visualizations.
 
 
+## 3 Steps to Follow prior to selecting an AirBnB:
+1. Initial Visual Overview: Use the Heat Map to see the overall concentration of listing throughout the Twin Cities Area
+2. Granular Visual Overiew: Use the Cluster Map to see how many listings are concentrated, then use the markers to interact and understand the name of the listing, overall rating and price per night.
+3. Deeper Drop-down View: By using the drop down to Counties, look at average cleanliness score and average rating score.
 
 
-## Heat Map
+***Heat Map***
 Write description here
 
 ![image](https://user-images.githubusercontent.com/119895467/232554678-c90692d9-2487-47b3-84d7-57bcf4b8bd68.png)
 
-## Cluster Map
+***Cluster Map***
 Write description here
 
 ![image](https://user-images.githubusercontent.com/119895467/232554848-91202569-9471-4a0e-b6e9-78ac2fb33c4e.png)
 
-## Bar Graph
+***Bar Graph***
 Write description here
 
 (insert image link)
 
-## Interactive Background
+***Interactive Background***
 Write description here
 
 (inster image link)
