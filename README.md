@@ -17,8 +17,8 @@ We wanted to understand how we could use an online datasource (API) to extract d
 
 ## 3 Steps to Follow prior to selecting an AirBnB:
 1. Initial Visual Overview: Use the Heat Map to see the overall concentration of listing throughout the Twin Cities Area
-2. Granular Visual Overiew: Use the Cluster Map to see how many listings are concentrated, then use the markers to interact and understand the name of the listing, overall rating and price per night.
-3. Deeper Drop-down View: By using the drop down to Counties, look at average cleanliness score and average rating score.
+2. Deeper Visual Overiew: Use the Cluster Map to see how many listings are concentrated, then use the markers to interact and understand the name of the listing, overall rating and price per night.
+3. Granular  Drop-down View: By using the drop down to Counties, look at average cleanliness score and average rating score.
 
 
 ***Heat Map***
