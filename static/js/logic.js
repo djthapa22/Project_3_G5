@@ -66,7 +66,7 @@ d3.json(clusterUrl).then(function(response){
 });
 
 
-///// CREATING bar chart-- jc
+///// CREATING bar chart-- jc. Ignore below but keep for now.
 
 
 // let graphUrl = "http://127.0.0.1:5000/api/v1.0/bar_graph"
@@ -105,80 +105,42 @@ d3.json(clusterUrl).then(function(response){
 
 let graphUrl = "http://127.0.0.1:5000/api/v1.0/bar_graph"
 
-const aggregateArray = arr => {
-  return arr.reduce((acc, val) => {
-     const index = acc.findIndex(obj => obj.county === val.county);
-     if(index !== -1){
-        acc[index].price += val.price;
-        acc[index].count++;
-     }else{
-        acc.push({
-           county: val.county,
-           price: val.price,
-           count: 1
-        });
-     };
-     return acc;
-  }, []).map(obj => {
-     obj.avg = obj.price / obj.count;
-     return obj;
-  });
-};
 
 d3.json(graphUrl).then(function(data){
   console.log(data);
 
-  const aggregatedData = aggregateArray(data);
-  console.log(aggregatedData);
+  var clean_rating = data.map(d => d.avg_cleanliness_score);
+  var overall_rating = data.map(d => d.avg_review_score);
+  var county_names = data.map(d => d.county);
 
-  let xValues = aggregatedData.map(obj => obj.county);
-  let yValues = aggregatedData.map(obj => obj.avg);
-
-  let trace = {
-    x: xValues,
-    y: yValues,
-    type: 'scatter',
-    
-  };
-
-  let layout = {
-    title: 'Average Price by County',
-    orientation: 'h'
+  let trace1 = {
+    x: county_names,
+    y: clean_rating,
+    name: 'clean rating bar chart',
+    type: 'bar'
   };
   
+  let trace2 = {
+    x: county_names,
+    y: overall_rating,
+    name: 'overall rating bar chart',
+    type: 'bar'
+  };
+  
+  var data = [trace1, trace2];
 
-  Plotly.newPlot("chart1", [trace], layout);
+
+  var layout = {
+    title: 'Rating Comparison by County',
+    xaxis: { title: 'County' },
+    yaxis: { title: 'Rating' }
+  };
+  
+  
+
+  Plotly.newPlot('chart1', data, layout);
+
 });
-
-const aggregateArray2 = arr2 => {
-  return arr2.reduce((acc2, val2) => {
-     const index = acc2.findIndex(obj2 => obj2.county === val2.county);
-     if(index !== -1){
-        acc2[index].review_scores_rating += val2.review_scores_rating;
-        acc2[index].count++;
-     }else{
-        acc2.push({
-           county: val2.county,
-           review_scores_rating: val2.review_scores_rating,
-           count: 1
-        });
-     };
-     return acc2;
-  }, []).map(obj2 => {
-     obj2.avg = obj2.review_scores_rating / obj2.count;
-     return obj2;
-  });
-};
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -232,7 +194,7 @@ d3.json(graphUrl).then((response)=>{
         dropMenu.append("option").text(test).property("value",test);
 
     };
-
+  bargraph(test)
 })
 
 ///// CREATING histogram GRAPH /////

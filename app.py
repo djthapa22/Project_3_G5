@@ -67,23 +67,26 @@ def heat_maps():
 @app.route("/api/v1.0/bar_graph")
 def bar_graph():
     # Create our session (link) from Python to the DB
-    session=Session(engine)
+    session= Session(engine)
     county= bnb_dset.county
-    price= bnb_dset.price
-    rs= bnb_dset.review_scores_rating
-    rc= bnb_dset.review_scores_cleanliness
+    listing= func.avg(bnb_dset.host_total_listings_count)
+    price= func.avg(bnb_dset.price)
+    clean= func.avg(bnb_dset.review_scores_cleanliness)
+    loc= func.avg(bnb_dset.review_scores_location)
+    rs= func.avg(bnb_dset.review_scores_rating)
 
-    sel= [county,price,rs,rc]
-    query_2= session.query(*sel).all()
+    sel= [county,listing,price,clean,loc,rs]
+    query_2= session.query(*sel).group_by(bnb_dset.county).all()
     session.close()
-    
     bar_g= []
-    for c,p,r,cl in query_2:
+    for c,li,p,cl,lo,r in query_2:
         dict_2={}
+        dict_2["avg_listing_count"]= li
         dict_2["county"]=c
-        dict_2["price"]=p
-        dict_2["review_score"]=r
-        dict_2["cleanliness_score"]=cl
+        dict_2["avg_price"]=p
+        dict_2["avg_cleanliness_score"]=cl
+        dict_2["avg_review_score"]=r
+        dict_2["avg_loc_score"]=lo
         bar_g.append(dict_2)
         
     return jsonify(bar_g)
