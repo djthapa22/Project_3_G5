@@ -16,9 +16,6 @@ We wanted to understand how we could use an online datasource (API) to extract d
 
 
 
-## Getting Started
-The data prep can be found in the file...
-
 ## Heat Map
 Write description here
 
@@ -42,13 +39,13 @@ Write description here
 
 ## Contributors 
 
-DJ Thapa <br>
-Caleb Steeves <br>
-John Gonzalez <br>
-Tanner Victorian <br>
+* ***DJ Thapa*** <br>
+* ***Caleb Steeves***<br>
+* ***John Gonzalez*** <br>
+* ***Tanner Victorian*** <br>
 
 ## Sources
 
-[Inside Airbnb:](http://insideairbnb.com/twin-cities-msa) <br>
-[Bideo.JS](https://rishabhp.github.io/bideo.js/)
+* [Inside Airbnb:](http://insideairbnb.com/twin-cities-msa) <br>
+* [Bideo.JS](https://rishabhp.github.io/bideo.js/)
 
