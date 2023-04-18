@@ -1,12 +1,19 @@
 # Traveling to Minneapolis? We'll find your perfect AirBnB!
 
-## Description
+## Overview
 For this project, our group decided to analyze the AirBnB data within the greater Twin Cities area.
-We wanted to understand how we could use an online datasource (API) to extract data and complete the following steps of ETL:
+We wanted to understand how we could use an online datasource (API) to extract data and complete the following steps of ETL steps in driving our visiualization
 
-* Extraction:
-* Transform
-* Load
+* ***<ins>Extraction:*** </ins>  <br> We utilized the AirBnB data found in below resource for Twin Cities area.
+  * We used the CSV method to download the data
+* ***<ins> Transform:***</ins> <br>  We used the following steps to clean our code
+  * Pandas: Consolidated and updated datatypes to a dataframe to be used for analysis
+    * Converted the dataframe into a SQL Lite database 
+  * SQL Alchemy: Utilized the datbase to perform SQL Alchemy queryies that tranformed  exact data/ information to flow into our flask JSONified form
+* ***<ins>Load:***</ins> <br> We then used a flask API data to house our data to be used for visualizations
+  * Flask Code: Created three unique routes to house our three visualizations: Heat Map, Cluster Map & Bar Graph
+  * Javascript: Using HTML, CSS,and other configurations used Javascript to create our visualizations.
+
 
 
 ## Getting Started
