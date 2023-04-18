@@ -67,27 +67,117 @@ d3.json(clusterUrl).then(function(response){
 
 
 ///// CREATING bar chart-- jc
+
+
+// let graphUrl = "http://127.0.0.1:5000/api/v1.0/bar_graph"
+
+// const aggregateArray = arr => {
+//   return arr.reduce((acc, val) => {
+//      const index = acc.findIndex(obj => obj.county === val.county);
+//      if(index !== -1){
+//         acc[index].price += val.price;
+//         acc[index].count++;
+//      }else{
+//         acc.push({
+//            county: val.county,
+//            price: val.price,
+//            count: 1
+//         });
+//      };
+//      return acc;
+//   }, []).map(obj => {
+//      obj.avg = obj.price / obj.count;
+//      return obj;
+//   });
+// };
+
+// d3.json(graphUrl).then(function(data){
+//   console.log(data);
+
+//   const aggregatedData = aggregateArray(data);
+//   console.log(aggregatedData);
+
+//   aggregatedData.forEach(obj => {
+//     console.log(`${obj.county}: ${obj.avg}`);
+//   });
+// });
+
+
 let graphUrl = "http://127.0.0.1:5000/api/v1.0/bar_graph"
 
-d3.json(graphUrl).then(function(data){
-    console.log(data)
+const aggregateArray = arr => {
+  return arr.reduce((acc, val) => {
+     const index = acc.findIndex(obj => obj.county === val.county);
+     if(index !== -1){
+        acc[index].price += val.price;
+        acc[index].count++;
+     }else{
+        acc.push({
+           county: val.county,
+           price: val.price,
+           count: 1
+        });
+     };
+     return acc;
+  }, []).map(obj => {
+     obj.avg = obj.price / obj.count;
+     return obj;
+  });
+};
 
-    const aggregateArray = arr => {
-      return arr.reduce((acc, val) => {
-         const index = acc.findIndex(obj => obj.county === val.county);
-         if(index !== -1){
-            acc[index].amount += val.amount;
-         }else{
-            acc.push({
-               county: val.county,
-               amount: val.amount
-            });
-         };
-         return acc;
-      }, []);
-   };
-   console.log(aggregateArray(transactions));
+d3.json(graphUrl).then(function(data){
+  console.log(data);
+
+  const aggregatedData = aggregateArray(data);
+  console.log(aggregatedData);
+
+  let xValues = aggregatedData.map(obj => obj.county);
+  let yValues = aggregatedData.map(obj => obj.avg);
+
+  let trace = {
+    x: xValues,
+    y: yValues,
+    type: 'scatter',
+    
+  };
+
+  let layout = {
+    title: 'Average Price by County',
+    orientation: 'h'
+  };
+  
+
+  Plotly.newPlot("chart1", [trace], layout);
 });
+
+const aggregateArray2 = arr2 => {
+  return arr2.reduce((acc2, val2) => {
+     const index = acc2.findIndex(obj2 => obj2.county === val2.county);
+     if(index !== -1){
+        acc2[index].review_scores_rating += val2.review_scores_rating;
+        acc2[index].count++;
+     }else{
+        acc2.push({
+           county: val2.county,
+           review_scores_rating: val2.review_scores_rating,
+           count: 1
+        });
+     };
+     return acc2;
+  }, []).map(obj2 => {
+     obj2.avg = obj2.review_scores_rating / obj2.count;
+     return obj2;
+  });
+};
+
+
+
+
+
+
+
+
+
 
 
 
