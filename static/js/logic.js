@@ -112,18 +112,19 @@ d3.json(graphUrl).then(function(data){
   var clean_rating = data.map(d => d.avg_cleanliness_score);
   var overall_rating = data.map(d => d.avg_review_score);
   var county_names = data.map(d => d.county);
+  var price = data.map(d => d.avg_price)
 
   let trace1 = {
     x: county_names,
     y: clean_rating,
-    name: 'clean rating bar chart',
+    name: 'cleanliness rating',
     type: 'bar'
   };
   
   let trace2 = {
     x: county_names,
     y: overall_rating,
-    name: 'overall rating bar chart',
+    name: 'overall rating',
     type: 'bar'
   };
   
@@ -137,10 +138,29 @@ d3.json(graphUrl).then(function(data){
   };
   
   
-
   Plotly.newPlot('chart1', data, layout);
 
+
+  let trace3 = {
+    x: county_names,
+    y: price,
+    name: 'price scatter plot',
+    type: 'scatter'
+  };
+
+  var layout2 = {
+    title: 'Average Price by County',
+    xaxis: { title: 'County' },
+    yaxis: { title: 'Price' }
+  };
+
+
+  Plotly.newPlot('chart2', [trace3], layout2);
 });
+
+
+
+  
 
 
 
@@ -194,7 +214,7 @@ d3.json(graphUrl).then((response)=>{
         dropMenu.append("option").text(test).property("value",test);
 
     };
-  bargraph(test)
+  //bargraph(test)
 })
 
 ///// CREATING histogram GRAPH /////
