@@ -2,7 +2,7 @@
 
 ## Overview
 For this project, our group decided to analyze the AirBnB data within the greater Twin Cities area.
-We wanted to understand how we could use an online datasource (API) to extract data and complete the following steps of ETL steps in driving our visiualization
+We wanted to understand how we could use an online datasource (API) to extract data and complete the following steps of ETL steps in driving our visualizations. 
 
 * ***<ins>Extraction:*** </ins>  <br> We utilized the AirBnB data found in below resource for Twin Cities area.
   * We used the CSV method to download the data
@@ -13,6 +13,7 @@ We wanted to understand how we could use an online datasource (API) to extract d
 * ***<ins>Load:***</ins> <br> We then used a flask API data to house our data to be used for visualizations
   * Flask Code: Created three unique routes to house our three visualizations: Heat Map, Cluster Map & Bar Graph
   * Javascript: Using HTML, CSS,and other configurations used Javascript to create our visualizations.
+
 
 
 
