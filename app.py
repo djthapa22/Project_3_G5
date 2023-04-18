@@ -67,25 +67,26 @@ def heat_maps():
 @app.route("/api/v1.0/bar_graph")
 def bar_graph():
     # Create our session (link) from Python to the DB
-    session=Session(engine)
-    listing= bnb_dset.host_total_listings_count
+    session= Session(engine)
     county= bnb_dset.county
-    price= bnb_dset.price
-    bedrooms= bnb_dset.bedrooms
-    rs= bnb_dset.review_scores_rating
+    listing= func.avg(bnb_dset.host_total_listings_count)
+    price= func.avg(bnb_dset.price)
+    clean= func.avg(bnb_dset.review_scores_cleanliness)
+    loc= func.avg(bnb_dset.review_scores_location)
+    rs= func.avg(bnb_dset.review_scores_rating)
 
-    sel= [listing,county,price,bedrooms,rs]
-    query_2= session.query(*sel).all()
+    sel= [county,listing,price,clean,loc,rs]
+    query_2= session.query(*sel).group_by(bnb_dset.county).all()
     session.close()
-    
     bar_g= []
-    for l,c,p,b,r in query_2:
+    for c,li,p,cl,lo,r in query_2:
         dict_2={}
+        dict_2["avg_listing_count"]= li
         dict_2["county"]=c
-        dict_2["listing"]= l
-        dict_2["price"]=p
-        dict_2["bedrooms"]=b
-        dict_2["review_score"]=r
+        dict_2["avg_price"]=p
+        dict_2["avg_cleanliness_score"]=cl
+        dict_2["avg_review_score"]=r
+        dict_2["avg_loc_score"]=lo
         bar_g.append(dict_2)
         
     return jsonify(bar_g)
@@ -101,14 +102,14 @@ def cluster_m():
     long=bnb_dset.longitude
     rs= bnb_dset.review_scores_rating
     accom= bnb_dset.accommodates
-    property_type= bnb_dset.property_type
+    link_url= bnb_dset.listing_url
 
 
-    sel= [name,super_host,price,lat,long,rs,accom,property_type]
+    sel= [name,super_host,price,lat,long,rs,accom,link_url]
     query_3= session.query(*sel).all()
 
     cluster_g= []
-    for n,s,p,la,lo,r,a,pt in query_3:
+    for n,s,p,la,lo,r,a,k in query_3:
         
         dict_3={}
         dict_3["name"]= n
@@ -118,7 +119,7 @@ def cluster_m():
         dict_3["longitude"]=lo
         dict_3["review_score"]=r
         dict_3["people_accommodates"]=a
-        dict_3["property_type"]=pt
+        dict_3["url"]=k
     
         cluster_g.append(dict_3)
         
