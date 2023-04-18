@@ -187,35 +187,82 @@ d3.json(graphUrl).then(function(data){
 
 // select the dropdown menu
 let dropMenu = d3.select("#selDataset");
-
-// Retreiving json data and logging it
-d3.json(graphUrl).then((response)=>{
-
-    // create empty array
-    let counties = []
-
-    // populate array with values from query
-    for (let i = 0; i < response.length; i++) {
-
-        let county = response[i].county
-        
-        counties.push(county);
-    
+    // Retreiving json data and logging it
+    d3.json(graphUrl).then((data)=>{
+        console.log(data)
+        // data array for counties
+        let counties = [];
+        // populate array with values from query
+        for (let i = 0; i < data.length; i++) {
+          let county = data[i].county
+          counties.push(county);
         };
-        
-    // creating new array to filter out duplicates
-    let countiesFinal = counties.filter((value, index, array) => array.indexOf(value) === index);
+        counties.forEach((place) => {
+            dropMenu.append("option").text(place).property("value",place);
+        });
+       let place = counties[0];
+       barGraph(place)
+  
 
+  function updateChart(selectedCounty) {
+    var filteredData = data.filter(function(d) {
+      return d.county === selectedCounty;
+    });
 
-    // append dropdown menu with values from the array.
-    for (let i = 0; i < countiesFinal.length; i++) {
-        
-        let test = countiesFinal[i]
-        dropMenu.append("option").text(test).property("value",test);
+    var clean_rating = filteredData.map(d => d.avg_cleanliness_score);
+    var overall_rating = filteredData.map(d => d.avg_review_score);
 
+    var trace1 = {
+      x: [selectedCounty],
+      y: clean_rating,
+      name: 'cleanliness rating',
+      type: 'bar'
     };
-  //bargraph(test)
+
+    var trace2 = {
+      x: [selectedCounty],
+      y: overall_rating,
+      name: 'overall rating',
+      type: 'bar'
+    };
+
+    var updatedData = [trace1, trace2];
+
+  Plotly.update('chart1', updatedData);
+}
+
 })
+
+Infinity()
+
+// // Retreiving json data and logging it
+// d3.json(graphUrl).then((response)=>{
+
+//     // create empty array
+//     let counties = []
+
+//     // populate array with values from query
+//     for (let i = 0; i < response.length; i++) {
+
+//         let county = response[i].county
+        
+//         counties.push(county);
+    
+//         };
+        
+//     // creating new array to filter out duplicates
+//     let countiesFinal = counties.filter((value, index, array) => array.indexOf(value) === index);
+
+
+//     // append dropdown menu with values from the array.
+//     for (let i = 0; i < countiesFinal.length; i++) {
+        
+//         let test = countiesFinal[i]
+//         dropMenu.append("option").text(test).property("value",test);
+
+//     };
+//   //bargraph(test)
+// })
 
 ///// CREATING histogram GRAPH /////
 
