@@ -1,7 +1,12 @@
 # Traveling to Minneapolis? We'll find your perfect AirBnB!
 
 ## Description
-For this project, we are analyizing.....
+For this project, our group decided to analyze the AirBnB data within the greater Twin Cities area.
+We wanted to understand how we could use an online datasource (API) to extract data and complete the following steps of ETL:
+
+* Extraction:
+* Transform
+* Load
 
 
 ## Getting Started
@@ -37,6 +42,6 @@ Tanner Victorian <br>
 
 ## Sources
 
-Inside Airbnb: http://insideairbnb.com/twin-cities-msa <br>
-Bideo.JS https://rishabhp.github.io/bideo.js/
+[Inside Airbnb:](http://insideairbnb.com/twin-cities-msa) <br>
+[Bideo.JS](https://rishabhp.github.io/bideo.js/)
 
