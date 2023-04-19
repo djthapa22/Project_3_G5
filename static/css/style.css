@@ -21,7 +21,7 @@ h2 {
 /* Country dropdown marker */
 .menu {
     position:relative;
-    top: 20px;
+    top: 50%;
     left: 50%;
     color: rgb(0, 0, 255);
     font-weight: bold;
