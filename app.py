@@ -80,13 +80,13 @@ def bar_graph():
     session.close()
     bar_g= []
     for c,li,p,cl,lo,r in query_2:
-        dict_2={}
-        dict_2["avg_listing_count"]= li
-        dict_2["county"]=c
-        dict_2["avg_price"]=p
-        dict_2["avg_cleanliness_score"]=cl
-        dict_2["avg_review_score"]=r
-        dict_2["avg_loc_score"]=lo
+        dict_2 = {}
+        dict_2["avg_listing_count"] = round(li, 2)
+        dict_2["county"] = c
+        dict_2["avg_price"] = round(p, 2)
+        dict_2["avg_cleanliness_score"] = round(cl, 2)
+        dict_2["avg_review_score"] = round(r, 2)
+        dict_2["avg_loc_score"] = round(lo, 2)
         bar_g.append(dict_2)
         
     return jsonify(bar_g)

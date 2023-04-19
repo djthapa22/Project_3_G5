@@ -118,7 +118,13 @@ let trace1 = {
   x:[entry.county],
   y:[entry.avg_cleanliness_score],
   name:'cleanliness score',
-  type:'bar'
+  type:'bar',
+  text: [entry.avg_cleanliness_score],
+  textposition: 'inside',
+  textfont:{
+    size:25
+  }
+
 
 }
 
@@ -126,12 +132,22 @@ let trace2 = {
   x:[entry.county],
   y:[entry.avg_review_score],
   name:'Review score',
-  type:'bar'
+  type:'bar',
+  text: [entry.avg_review_score],
+  textposition: 'inside',
+  textfont:{
+    size:25
+  }
 }
 
 let layout = {
   height: 500,
-  width: 500
+  width: 500,
+  xaxis: {
+      tickfont: {
+        size: 25
+      }
+    }
 };
 
 let data =[trace1,trace2]
