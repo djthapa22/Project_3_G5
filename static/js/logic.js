@@ -58,7 +58,7 @@ d3.json(clusterUrl).then(function(response){
 
         if (location) {
             markers.addLayer(L.marker([location.latitude,location.longitude])
-            .bindPopup(`<h3> ${response[i].name} </h3> <hr> <h4> ${response[i].property_type} -- accomodates: ${response[i].people_accommodates} </h4> 
+            .bindPopup(`<h3> ${response[i].name} </h3> <hr> <h4> ${response[i].url} -- accomodates: ${response[i].people_accommodates} </h4> 
             <hr> <h4> Price Per Night: $${response[i].price} -- Review Score: ${response[i].review_score} </h4>`));
         }
     }
@@ -130,8 +130,8 @@ d3.json(graphUrl).then(function(response){
   }
 
   let layout = {
-    height: 500,
-    width: 500
+    height: 400,
+    width: 700
 };
 
   let data =[trace1,trace2]
