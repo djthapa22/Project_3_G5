@@ -126,7 +126,7 @@ d3.json(graphUrl).then(function(response){
     x:[entry.county],
     y:[entry.avg_review_score],
     name:'Review score',
-    type:'bar'
+    type:'bar',
   }
 
   let layout = {
