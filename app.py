@@ -1,3 +1,4 @@
+# Importing dependencies:
 import numpy as np
 
 import sqlalchemy
@@ -31,6 +32,7 @@ CORS(app, support_credentials=True)
 # Flask Routes
 #################################################
 
+# Creating the route for data json dictionaries:
 @app.route("/")
 def welcome():
     """List all available api routes."""
@@ -41,7 +43,7 @@ def welcome():
         f"/api/v1.0/bar_graph"
     )
 
-
+# Flask route for the heatmap
 @app.route("/api/v1.0/heat_map")
 def heat_maps():
     # Create our session (link) from Python to the DB
@@ -63,10 +65,10 @@ def heat_maps():
         heat_map_list.append(dict_1)
     return jsonify(heat_map_list)
    
-
+# Setting the route for the bar-graph
 @app.route("/api/v1.0/bar_graph")
 def bar_graph():
-    # Create our session (link) from Python to the DB
+    # Create our session (link) and averaging the metrics for bar_graph
     session= Session(engine)
     county= bnb_dset.county
     listing= func.avg(bnb_dset.host_total_listings_count)
@@ -74,11 +76,13 @@ def bar_graph():
     clean= func.avg(bnb_dset.review_scores_cleanliness)
     loc= func.avg(bnb_dset.review_scores_location)
     rs= func.avg(bnb_dset.review_scores_rating)
-
+# creating the selection for the query
     sel= [county,listing,price,clean,loc,rs]
     query_2= session.query(*sel).group_by(bnb_dset.county).all()
     session.close()
+    # Creating a bar_g list array
     bar_g= []
+#    Unpacking the metrics within our sql-lite to append to bar_g dictionary
     for c,li,p,cl,lo,r in query_2:
         dict_2={}
         dict_2["avg_listing_count"]= li
@@ -90,7 +94,7 @@ def bar_graph():
         bar_g.append(dict_2)
         
     return jsonify(bar_g)
-    
+# Creating a route for Cluster map
 @app.route("/api/v1.0/cluster_map")
 def cluster_m():
     # Create our session (link) from Python to the DB

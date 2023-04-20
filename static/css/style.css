@@ -1,6 +1,9 @@
 body {
-    padding: 0px;
+    width: 100%;
+    height: 100%;
     margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
   }
 
 h1 {
@@ -23,18 +26,19 @@ h2 {
     position:relative;
     top: 50%;
     left: 50%;
-    color: rgb(0, 0, 255);
+    color: gold;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 40px;
     text-decoration-line: underline
 }
 
 #selDataset {
     position:absolute;
-    /* height: 50px;
-    width:100px; */
-    top: 40px;
-    background-color: rgb(150, 164, 172);
+    height: 40px;
+    width:160px;
+    font-size: 20px;
+    top: 55px;
+    background-color: rgb(162, 162, 175);
     font-weight: bold;
     /* left: 10% */
 }
@@ -45,7 +49,7 @@ h2 {
     position:relative;
     top: 10%;
     left: 15%;
-    color: rgb(4, 255, 255);
+    color: gold;
     font-weight: bold;
     font-size: 30px;
     text-decoration-line: underline
@@ -65,7 +69,7 @@ h2 {
     position:relative;
     top: 450px;
     left: 60%;
-    color: rgb(255, 0, 0);
+    color: gold;
     font-weight: bold;
     font-size: 30px;
     text-decoration-line: underline
@@ -100,9 +104,14 @@ h2 {
     position:relative;
     top: -150px;
     left:60%;
-    color: rgb(255, 230, 0);
+    /* color: black; */
     font-weight: bold;
     font-size: 30px;
+
+}
+
+.map2-header {
+    color: gold;
     text-decoration-line: underline
 }
 
@@ -120,7 +129,7 @@ h2 {
     position:relative;
     top: 300px;
     left: 15%;
-    color: rgb(255, 255, 255);
+    color: gold;
     font-weight: bold;
     font-size: 30px;
     text-decoration-line: underline
@@ -132,14 +141,33 @@ h2 {
     height:400px;
     width:700px;
     top: 40px;
+    background-color: rgb(41, 114, 209);
     /* right: 15% */
 }
 
-img {
-    position:absolute;
-    top: -10px;
-    right:500px;
-    opacity: 0.2;
+.header-img {
+    position:relative;
+    top: 0px;
+    right:-25%;
+    /* opacity: 0.2; */
     height:20%;
     width: 50%;
+    font-size: 25px;
+}
+
+#start {
+    position:relative;
+    top: 0px;
+    left: 00%;
+    font-size: 30px;
+    /* opacity: 0.2; */
+    /* height:20%;
+    width: 50%; */
+}
+
+.topnav {
+    position:relative;
+    top: -220px;
+    left: 00%;
+    font-size: 25px;
 }
