@@ -1,5 +1,6 @@
 ///// CREATING HEAT MAP /////
 
+// Defining initial Map
 let map1 = L.map("map1", {
     center: [44.9778, -93.2650],
     zoom: 10
@@ -13,29 +14,33 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // flask API url to get data
 let heatmapUrl = "http://127.0.0.1:5000/api/v1.0/heat_map"
 
+// using d3 to select data
 d3.json(heatmapUrl).then(function(response) {
 
     // console.log(response); 
-  
+
+    // creating empty array
     let heatArray = [];
   
+    // for loop to iterate through response 
     for (let i = 0; i < response.length; i++) {
       let location = response[i];
 
       // if statement is checking for none nulls
       if (location) {
-        //console.log(location);
+        //pushing coordinates to array
         heatArray.push([location.latitude, location.longitude]);
       }
   
     }
-  
+    // defining heat map style
     let heat = L.heatLayer(heatArray, {
       radius: 20,
       blur: 5
     }).addTo(map1);
   
   });
+
 
 ///// CREATING INTERACTIVE MAP /////
 let map2 = L.map("map2", {
@@ -48,21 +53,31 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map2);
 
+// Flask API Url
 let clusterUrl = "http://127.0.0.1:5000/api/v1.0/cluster_map" 
 
+// using d3 to select data
 d3.json(clusterUrl).then(function(response){
+
+    // defining marker category
     let markers = L.markerClusterGroup();
 
+    // for loop to iterate through responses
     for (let i=0; i<response.length;i++){
         let location = response[i];
 
+        // if statment to check for nulls
         if (location) {
+
+            // adding marker layer
             markers.addLayer(L.marker([location.latitude,location.longitude])
+
+            // binding popup
             .bindPopup(`<h3> ${response[i].name} </h3> <hr> <h4> ${response[i].property_type} -- accomodates: ${response[i].people_accommodates} </h4> 
-            <hr> <h4> Price Per Night: $${response[i].price} -- Review Score: ${response[i].review_score} </h4>`));
+            <hr> <h4> Price Per Night: $${response[i].price} -- Review Score: ${response[i].review_score} </h4> <hr> <h4>  County: ${response[i].county} -- ${response[i].url} </h4>`));
         }
     }
-
+    // adding layer to map
     map2.addLayer(markers);
 
 });
@@ -71,6 +86,7 @@ d3.json(clusterUrl).then(function(response){
 ///// CREATING DROP DOWN MENU /////
 let graphUrl = "http://127.0.0.1:5000/api/v1.0/bar_graph"
 
+// init function to pre populate graphs
 function init(){
     // D3 to select dropdown menu
     let dropMenu = d3.select("#selDataset");
@@ -87,33 +103,47 @@ function init(){
         for (let i = 0; i < data.length; i++) {
 
           let county = data[i].county
-        
+          
+          // pushing county name to empty array
           counties.push(county);
     
         };
 
+        // interating through each county in the array and adding it to the drop down.
         counties.forEach((place) => {
             dropMenu.append("option").text(place).property("value",place);
         });
 
-       let place = counties[0];
+        // pre populating
+        let place = counties[0];
 
-       barGraph(place);
-       gauge(place);
+        // calling functions to create graphs
+        barGraph(place);
+        gauge(place);
 
     });
 }
 
 ///// CREATING BAR GRAPH /////
+
+// creating barGraph function
 function barGraph(selection){
 
+  // using d3 to select data
 d3.json(graphUrl).then(function(response){
+
+  // creating an array of the entire response
   let counties = response;
+
+  // filtering response for what is selected
   let filteredData = counties.filter((data)=>data.county == selection)
+
+  // calling the selected county
   let entry = filteredData[0];
 
-  console.log(entry)
+  // console.log(entry)
 
+  // defining the data for the cleanliness score
   let trace1 = {
     x:[entry.county],
     y:[entry.avg_cleanliness_score],
@@ -122,6 +152,7 @@ d3.json(graphUrl).then(function(response){
 
   }
 
+  // defining the data for the review score
   let trace2 = {
     x:[entry.county],
     y:[entry.avg_review_score],
@@ -129,13 +160,16 @@ d3.json(graphUrl).then(function(response){
     type:'bar'
   }
 
+  // defining the size of the graph
   let layout = {
-    height: 500,
-    width: 500
+    height: 400,
+    width: 700
 };
 
+  // combining the traces
   let data =[trace1,trace2]
 
+  // plotting the bar graph
   Plotly.newPlot('chart1', data, layout);
 
 });
@@ -144,12 +178,22 @@ d3.json(graphUrl).then(function(response){
 
 ///// CREATING GUAGE /////
 
+// creating gauge function
 function gauge(selection) {
+
+  // using d3 to select data
   d3.json(graphUrl).then((data) => {
+
+    // creating array of the entire response
     let counties = data;
+
+    // filter array for the selected county
     let filteredData = counties.filter((data)=>data.county == selection)
+
+    // calling the data for the selected county 
     let entry = filteredData[0];
 
+    // defining gauge
     let trace1 = [{
       domain: { x: [0, 1], y: [0, 1] },
       value: entry.avg_price,
@@ -172,15 +216,17 @@ function gauge(selection) {
       }
     }];
 
+    // plotting gauge
     Plotly.newPlot("gauge",trace1);
 
   });
 }
 
-
+// function for anytime the drop down menu is changed
 function optionChanged(selection){
   barGraph(selection);
   gauge(selection);
 };
 
+// init to pre populate graphs
 init();

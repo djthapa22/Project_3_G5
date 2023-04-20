@@ -32,9 +32,37 @@
     <!-- Plotly Plugin-->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 </head>
 
+<style>
+    /* unvisited link */
+    a:link {
+      color: red;
+    }
+    
+    /* visited link */
+    a:visited {
+      color: green;
+    }
+    
+    /* mouse over link */
+    a:hover {
+      color: hotpink;
+    }
+    
+    /* selected link */
+    a:active {
+      color: blue;
+    }
+</style>
+
 <body>
+
+    <p><b><a href="http://insideairbnb.com/get-the-data/" target="_blank">Link to Dataset Source</a></b></p>
+
     <h1>Traveling to Minneapolis? We'll find your perfect AirBnB!</h1>
     <div class="header-img">
         <img src="Resources/minneapolis_skyline.jpeg" alt="minneapolis_skyline">
@@ -77,6 +105,25 @@
 
     <!-- Our JavaScript-->
     <script type="text/javascript" src="static/js/logic.js"></script>
+
+    <script type="text/javascript">
+        jQuery(function($){
+            $('body').vidbg({
+                'mp4': 'media/twin_cities.mp4',
+                'webm': 'media/webm_video.webm',
+                'poster': 'media/twin_cities.jpg',
+            }, {
+                // Options
+                muted: true,
+                loop: true,
+                        overlay: true,
+                overlayColor: '#000',
+                overlayAlpha: '0.3',
+            });
+        });
+    </script>
+
+    <script src="static/js/vidbg.min.js"></script>
 </body>
 
 </html>
