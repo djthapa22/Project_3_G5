@@ -103,13 +103,15 @@ def cluster_m():
     rs= bnb_dset.review_scores_rating
     accom= bnb_dset.accommodates
     link_url= bnb_dset.listing_url
+    county= county= bnb_dset.county
+    property_type= bnb_dset.property_type
 
 
-    sel= [name,super_host,price,lat,long,rs,accom,link_url]
+    sel= [name,super_host,price,lat,long,rs,accom,link_url,county,property_type]
     query_3= session.query(*sel).all()
 
     cluster_g= []
-    for n,s,p,la,lo,r,a,k in query_3:
+    for n,s,p,la,lo,r,a,k,c,pt in query_3:
         
         dict_3={}
         dict_3["name"]= n
@@ -120,7 +122,8 @@ def cluster_m():
         dict_3["review_score"]=r
         dict_3["people_accommodates"]=a
         dict_3["url"]=k
-    
+        dict_3["property_type"]=pt
+        dict_3["county"]=c
         cluster_g.append(dict_3)
         
     return jsonify(cluster_g)
