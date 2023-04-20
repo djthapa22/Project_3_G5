@@ -74,7 +74,7 @@ d3.json(clusterUrl).then(function(response){
 
             // binding popup
             .bindPopup(`<h3> ${response[i].name} </h3> <hr> <h4> ${response[i].property_type} -- accomodates: ${response[i].people_accommodates} </h4> 
-            <hr> <h4> Price Per Night: $${response[i].price} -- Review Score: ${response[i].review_score} </h4> <hr> <h4>  County: ${response[i].county} -- ${response[i].url} </h4>`));
+            <hr> <h4> Price Per Night: $${response[i].price} -- Review Score: ${response[i].review_score} </h4> <hr> <h4>  County: ${response[i].county} -- <a href=${response[i].url}>AirBnb Link</a> </h4>`));
         }
     }
     // adding layer to map
