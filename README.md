@@ -64,10 +64,12 @@ The Price Gauge updates the average county cost depending on the user's selectio
 
 The Twin Cities Airbnb Analysis project provides users with easy-to-understand visualizations that enable them to make informed decisions about where to book their next trip to Minnesota. The project highlights Hennepin as the county with the most listings and the median average per night of $158. Ramsey is the most affordable county, with a median average of $139/night, making it the perfect choice for price-sensitive travelers. Finally, LeSauer has the highest cleanliness score of 4.92 and a median average of $290/night.
 
-## Source of Data
-[Inside AirBNB](http://insideairbnb.com/get-the-data/)
+## Source of Data and PPT Link
+[Inside AirBNB](http://insideairbnb.com/get-the-data/)<br>
+[PPT Link](https://github.com/djthapa22/Project_3_G5/blob/main/Resources/Twin%20Cities_%20AirBnB.pdf)<br>
 
-
+**License and rights** 
+<br>
 ![Screenshot 2023-04-20 at 8 31 32 PM](https://user-images.githubusercontent.com/119380122/233520005-1cc8ae89-ff32-4a0b-9fdc-41055b517b05.png)
 
 
