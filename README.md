@@ -68,7 +68,7 @@ The Twin Cities Airbnb Analysis project provides users with easy-to-understand v
 [Inside AirBNB](http://insideairbnb.com/get-the-data/)<br>
 [PPT Link](https://github.com/djthapa22/Project_3_G5/blob/main/Resources/Twin%20Cities_%20AirBnB.pdf)<br>
 
-**License and rights** 
+**License and rights:** 
 <br>
 ![Screenshot 2023-04-20 at 8 31 32 PM](https://user-images.githubusercontent.com/119380122/233520005-1cc8ae89-ff32-4a0b-9fdc-41055b517b05.png)
 
